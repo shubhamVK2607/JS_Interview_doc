@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Debounce Test</title>
+  </head>
+  <body>
+    <h1>Debounce Example</h1>
+    <input type="text" id="debounceInput" placeholder="Type something..." />
+    <p>Check the console for debounced output.</p>
+
+    <script>
+      // Debounce function
+      function debounce(fn, delay) {
+        let timer;
+
+        return function (...args) {
+          console.log(timer);
+          clearTimeout(timer);
+          timer = setTimeout(() => {
+            fn(...args);
+          }, delay);
+        };
+      }
+
+      // Function to handle input event
+      const handleInput = debounce((event) => {
+        console.log("User input:", event.target.value);
+      }, 2000); // 500ms delay
+
+      // Attach event listener to input field
+      const inputField = document.getElementById("debounceInput");
+      inputField.addEventListener("input", handleInput);
+    </script>
+  </body>
+</html>
